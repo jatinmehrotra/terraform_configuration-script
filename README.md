@@ -8,24 +8,24 @@ install jq package manually or allow script to do it for you
 
 > install jq package for parsing json
 ```shell
-  sudo apt install jq
+sudo apt install jq
 ```
 ## Usage
 > change the permissions of script
 ```shell
-  chmod 700 terraform_configuration_script
+chmod 700 terraform_configuration_script
 ```
 
 > To run the script 
 ```shell
-  source ./terraform_configuration_script
+source ./terraform_configuration_script
 ```
 
 
 > enter the arn manually when prompted by script
 ```shell
  
- Enter your account role arn: //enter your complete role arn
+Enter your account role arn: //enter your complete role arn
 
 ```
 
