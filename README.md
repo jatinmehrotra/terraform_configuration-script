@@ -22,7 +22,7 @@ source ./terraform_config_script
 ```
 
 
-> enter the arn manually when prompted by script
+> enter the arn manually after running the script
 ```shell
  
 Enter your account role arn: //enter your complete role arn
