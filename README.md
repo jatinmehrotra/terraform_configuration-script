@@ -1,6 +1,6 @@
 # Terraform-configuration-script
 
-This repository contains bash script for configuring terraform with AWS provider when using **Roles** and **MFA**.This script incorporates error handling for null values of role ARN's and incorrect values.
+This repository contains bash script for configuring terraform with AWS provider when using **Roles** and **MFA**. This script incorporates error handling for **null value of role ARN's and incorrect values.**
 - Note  :- **The variables for this script are valid for current bash session. Need to rerun script if terminal is closed or new bash session is started.**
 
 ## Prerequisites
