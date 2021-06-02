@@ -1,7 +1,7 @@
 # Terraform-configuration-script
 
 This repository contains bash script for configuring terraform and aws provider when using roles and MFA.This script incorporates error handling for null values of role ARN's and incorrect values.
-- Note  :- **The variables for this script are valid only current bash session.**
+- Note  :- **The variables for this script are valid for current bash session.Need to rerun script if terminal is closed or new bash session is started.**
 
 ## Prerequisites
 install jq package manually or allow script to do it for you
