@@ -6,19 +6,19 @@ This repository contains bash script for configuring terraform with AWS provider
 ## Prerequisites
 install jq package manually or allow script to do it for you
 
-
+> install jq package for parsing json
 ```shell
   sudo apt install jq
 ```
 ## Usage
 > change the permissions of script
 ```shell
-  chmod 700 terraform_configuration-script
+  chmod 700 terraform_configuration_script
 ```
 
 > To run the script 
 ```shell
-  source ./terraform_configuration-script
+  source ./terraform_configuration_script
 ```
 
 
