@@ -7,7 +7,7 @@ install jq package manually or allow script to do it for you
 
 
 ```shell
-  git clone https://github.com/jatinmehrotra/Notes-node.js-command-line.git
+  sudo apt install jq
 ```
 ## Usage
 > change the permissions of script
