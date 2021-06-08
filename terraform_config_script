@@ -1,36 +1,57 @@
 #!/bin/bash
 
+unset aws_credentials
+unset AWS_ACCESS_KEY_ID
+unset AWS_SECRET_ACCESS_KEY
+unset AWS_SESSION_TOKEN
+
+aws_profiles=$(less ~/.aws/config |grep  "\[profile"|sed -n 's/.*\[profile *\([^][]*\).*/\1/p')
 sudo apt install jq
 
 
 while true;
 do
-   echo ""	
-   read -p "Enter your account role arn: " user_role_arn
-
+   echo ""
+   echo "These are the profiles which is currently configured: "$aws_profiles
+   echo ""   
+   read -p "Enter your profile name to find associated ARN: " user_role_arn
    if [ -z $user_role_arn ]
    then
-        echo ""   
-	echo "You role arn is empty, try again!!!"
-   else     
-       	
-        aws_credentials=$(aws sts assume-role --role-arn $user_role_arn  --role-session-name "RoleSession1" 2>/dev/null )
-        if [[ -z $aws_credentials  ]]
+        echo ""
+        echo "You profile choice is empty, try again!!!"
+   else
+
+
+        user_role_arn=$(sed -n "/$user_role_arn/,/profile/{/profile/d;p}" ~/.aws/config|grep role|tr -d " \t\r"| sed 's/^role_arn=//')
+   	echo ""
+	if [ -z $user_role_arn ]
         then
-	   echo ""	
-	   echo "incorrect arn,try again!!!"
-	   continue
-        else 	   
+        echo ""
+        echo "You please check your profile spelling or there is no role arn for this profile, try again!!!"
+        else
+   
+   		echo "this is the arn from your chosen profile: "$user_role_arn
+   		echo ""
+
+       	
+       	        aws_credentials=$(aws sts assume-role --role-arn $user_role_arn  --role-session-name "RoleSession1" 2>/dev/null )
+       		if [[ -z $aws_credentials  ]]
+        	then
+	   	echo ""	
+	   	echo "incorrect arn or MFA,try again!!!"
+	   	continue
+       	        else 	   
      
-            export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
-     	    export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
-     	    export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
+           		 export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
+     	    		 export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
+     	    		 export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
 
-  	    echo ""
+  	    	         echo ""
 
-     	    echo "You can succesfuuly run 'terraform plan' command now "
-	    echo ""
-	    break
-        fi	    
-   fi
+     	    		 echo "You can succesfuuly run 'terraform plan' command now "
+	    		 echo ""
+	    		 break
+        	 fi	    
+	fi
+   fi	
 done
