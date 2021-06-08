@@ -22,10 +22,9 @@ source ./terraform_config_script
 ```
 
 
-> enter the arn manually after running the script
+> enter the profile name after running the script
 ```shell
  
-Enter your account role arn: //enter your complete role arn
-
+Enter your profile name to find associated ARN: //enter your profile which is prompted by script
 ```
 
